@@ -12,7 +12,11 @@ interface LaunchNotificationProps extends PConnFieldProps {
 function LaunchNotification(props: LaunchNotificationProps) {
   const { getPConnect, subscriptionMatcher = 'NF_NOTIFICATION' } = props;
   const pConnect = getPConnect();
-  const requestor = PCore.getEnvironmentInfo().getOperatorIdentifier()?.toUpperCase();
+  const environmentInfo =
+    typeof PCore !== 'undefined' && typeof PCore.getEnvironmentInfo === 'function'
+      ? PCore.getEnvironmentInfo()
+      : undefined;
+  const requestor = environmentInfo?.getOperatorIdentifier?.()?.toUpperCase() || '';
 
   const [popup, setPopup] = useState<{
     visible: boolean;

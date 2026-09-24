@@ -20,6 +20,12 @@ if (!window.PCore) {
   window.PCore = {} as any;
 }
 
+if (!window.PCore.getEnvironmentInfo) {
+  window.PCore.getEnvironmentInfo = () => ({
+    getOperatorIdentifier: () => 'storybook-user'
+  });
+}
+
 const worklistData = {
   data: {
     data: [
